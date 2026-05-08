@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  /* Color palette */
+  --color-navy: #2C395C;
+  --color-slate: #8B98A9;
+  --color-mist: #A6BBCE;
+  --color-sand: #D9BC9C;
+  --color-cream: #FCF4EF;
+
+  /* Typography */
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Montserrat", system-ui, sans-serif;
+}
+
+:root {
+  --color-navy: #2C395C;
+  --color-slate: #8B98A9;
+  --color-mist: #A6BBCE;
+  --color-sand: #D9BC9C;
+  --color-cream: #FCF4EF;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  font-family: var(--font-body);
+  color: var(--color-slate);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Refined scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(44, 57, 92, 0.2);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(44, 57, 92, 0.35);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(217, 188, 156, 0.35);
+  color: var(--color-navy);
+}
+
+/* Focus ring — accessible but elegant */
+:focus-visible {
+  outline: 1.5px solid rgba(217, 188, 156, 0.7);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
