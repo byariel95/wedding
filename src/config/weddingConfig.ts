@@ -30,6 +30,7 @@ export interface WeddingConfig {
   musicUrl: string
   photos: string[]
   invitationText: string
+  closingText: string
   giftNote: string
   hashtag?: string
 }
@@ -73,12 +74,16 @@ const weddingConfig: WeddingConfig = {
     'https://res.cloudinary.com/wovenwar/image/upload/v1777223986/IMG_7173.JPG_d9e3pa.jpg',
     'https://res.cloudinary.com/wovenwar/image/upload/v1777223951/IMG_7180.JPG_vtmngl.jpg',
     'https://res.cloudinary.com/wovenwar/image/upload/v1777224506/IMG_7563.JPG_sy3xlm.jpg',
-  ],
+    'https://res.cloudinary.com/wovenwar/image/upload/v1778433811/IMG_7891_i8n3hk.jpg',
+    'https://res.cloudinary.com/wovenwar/image/upload/v1778433953/IMG_7917_qz30te.jpg',
+    'https://res.cloudinary.com/wovenwar/image/upload/v1778433954/IMG_7900_gx5pqu.jpg',],
   invitationText:
     'Con mucha alegría les hacemos participes de la celebración de nuestra boda civil',
+  closingText:
+    'No hay celebración completa sin ti. Te guardamos un lugar muy especial.',
   giftNote:
     'Su presencia es el mejor regalo. Si deseas ayudarnos en esta nueva etapa, preferimos una contribución económica.',
-  hashtag: '#MishellYAriel2026',
+  hashtag: '#Mishell&Ariel2026',
 }
 
 export default weddingConfig

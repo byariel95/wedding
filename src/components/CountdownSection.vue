@@ -61,19 +61,24 @@ onMounted(() => {
   }, 1000)
 
   ctx.value = gsap.context(() => {
-    gsap.from('.countdown-header', {
-      opacity: 0, y: 35, duration: 1.1, ease: 'power3.out',
-      scrollTrigger: { trigger: '.countdown-header', start: 'top 88%' },
+    const tl = gsap.timeline({
+      defaults: { duration: 0.9, ease: 'power3.out' },
+      scrollTrigger: {
+        trigger: sectionRef.value,
+        start: 'top 75%',
+        end: 'bottom 30%',
+        scrub: 1,
+      },
     })
-    gsap.from('.countdown-card', {
-      opacity: 0, y: 45, scale: 0.94, duration: 0.9,
-      stagger: 0.1, ease: 'power3.out',
-      scrollTrigger: { trigger: '.countdown-cards', start: 'top 88%' },
-    })
-    gsap.from('.countdown-footer', {
-      opacity: 0, y: 15, duration: 0.8, ease: 'power2.out', delay: 0.3,
-      scrollTrigger: { trigger: '.countdown-footer', start: 'top 95%' },
-    })
+
+    tl.from('.countdown-header', { autoAlpha: 0, y: 35, duration: 1.1 })
+      .from('.countdown-card', {
+        autoAlpha: 0,
+        y: 45,
+        scale: 0.94,
+        stagger: 0.08,
+      }, '-=0.6')
+      .from('.countdown-footer', { autoAlpha: 0, y: 15, ease: 'power2.out' }, '-=0.5')
   }, sectionRef.value!)
 })
 
@@ -106,7 +111,7 @@ onUnmounted(() => {
 
       <!-- Header -->
       <div class="countdown-header mb-14">
-        <p class="font-body text-sand/60 text-xs tracking-[0.35em] uppercase mb-3">El gran momento</p>
+        <p class="font-body text-sand/60 text-lg tracking-[0.35em] uppercase mb-3">El gran momento</p>
         <h2 class="font-display text-navy font-light tracking-wide mb-5" style="font-size: clamp(2.4rem, 6vw, 3.8rem);">
           Cuenta Regresiva
         </h2>
@@ -189,3 +194,11 @@ onUnmounted(() => {
     </div>
   </section>
 </template>
+
+<style scoped>
+.countdown-header,
+.countdown-card,
+.countdown-footer {
+  will-change: transform, opacity;
+}
+</style>

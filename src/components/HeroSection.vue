@@ -27,70 +27,41 @@ const formattedDate = computed(() => {
 
 onMounted(() => {
   ctx.value = gsap.context(() => {
-    // Línea decorativa superior
-    gsap.from(".hero-top-line", {
+    // Timeline secuencial del hero (auto-play al cargar)
+    const tl = gsap.timeline({
+      defaults: { duration: 0.9, ease: "power3.out" },
+    });
+
+    tl.from(".hero-top-line", {
       scaleX: 0,
-      opacity: 0,
+      autoAlpha: 0,
       duration: 1.4,
-      ease: "power3.out",
-      delay: 0.1,
-    });
-    // Etiqueta superior
-    gsap.from(".hero-label", {
-      opacity: 0,
-      y: -12,
-      duration: 0.9,
-      ease: "power2.out",
-      delay: 0.5,
-    });
-    // Nombres + ampersand en stagger
-    gsap.from(".hero-name", {
-      opacity: 0,
-      y: 50,
-      duration: 1.4,
-      stagger: 0.18,
-      ease: "power3.out",
-      delay: 0.6,
-    });
-    // Separador ornamental
-    gsap.from(".hero-ornament", {
-      opacity: 0,
-      scaleX: 0,
-      duration: 1.1,
-      ease: "power2.out",
-      delay: 1.35,
-    });
-    // Fecha
-    gsap.from(".hero-date", {
-      opacity: 0,
-      y: 18,
-      duration: 1,
-      ease: "power2.out",
-      delay: 1.55,
-    });
-    // Subtítulo
-    gsap.from(".hero-subtitle", {
-      opacity: 0,
-      y: 14,
-      duration: 1,
-      ease: "power2.out",
-      delay: 1.75,
-    });
-    // Línea inferior + scroll indicator
-    gsap.from(".hero-bottom", {
-      opacity: 0,
-      duration: 1,
-      ease: "power2.out",
-      delay: 2.1,
-    });
-    // Bounce continuo del scroll arrow
+    })
+      .from(".hero-label", { autoAlpha: 0, y: -12, ease: "power2.out" }, "-=0.9")
+      .from(".hero-name", {
+        autoAlpha: 0,
+        y: 50,
+        duration: 1.4,
+        stagger: 0.18,
+      }, "-=0.6")
+      .from(".hero-ornament", {
+        autoAlpha: 0,
+        scaleX: 0,
+        duration: 1.1,
+        ease: "power2.out",
+      }, "-=0.8")
+      .from(".hero-date", { autoAlpha: 0, y: 18, ease: "power2.out" }, "-=0.6")
+      .from(".hero-subtitle", { autoAlpha: 0, y: 14, ease: "power2.out" }, "-=0.6")
+      .from(".hero-bottom", { autoAlpha: 0, ease: "power2.out" }, "-=0.5");
+
+    // Bounce continuo del scroll arrow (loop independiente)
     gsap.to(".hero-scroll-arrow", {
       y: 8,
       duration: 1.4,
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut",
-      delay: 2.8,
+      delay: tl.duration() + 0.3,
     });
   }, sectionRef.value!);
 });
@@ -176,7 +147,7 @@ onUnmounted(() => {
           text-shadow: 0 2px 60px rgba(217, 188, 156, 0.18);
         "
       >
-        {{ weddingConfig.groom.fullName }}
+        {{ weddingConfig.bride.fullName }}
       </h1>
 
       <!-- Ampersand -->
@@ -223,7 +194,7 @@ onUnmounted(() => {
           text-shadow: 0 2px 60px rgba(217, 188, 156, 0.18);
         "
       >
-        {{ weddingConfig.bride.fullName }}
+        {{ weddingConfig.groom.fullName }}
       </h1>
 
       <!-- Ornamental separator -->
@@ -383,3 +354,15 @@ onUnmounted(() => {
     ></div>
   </section>
 </template>
+
+<style scoped>
+.hero-top-line,
+.hero-label,
+.hero-name,
+.hero-ornament,
+.hero-date,
+.hero-subtitle,
+.hero-bottom {
+  will-change: transform, opacity;
+}
+</style>

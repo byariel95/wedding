@@ -25,53 +25,63 @@ const weddingDayNum = date.getDate();
 const weddingMonth = months[date.getMonth()].toUpperCase();
 
 onMounted(() => {
-  ctx.value = gsap.context(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: sectionRef.value, start: "top 85%" },
-    });
+    ctx.value = gsap.context(() => {
+      // Timeline secuencial vinculado al scroll
+      const tl = gsap.timeline({
+        defaults: {
+          duration: 0.8,
+          ease: "power3.out",
+        },
+        scrollTrigger: {
+          trigger: sectionRef.value,
+          start: "top 75%",
+          end: "bottom 25%",
+          scrub: 1,
+        },
+      });
 
-    tl.from(".invitation-logo", {
-      opacity: 0,
-      y: 25,
-      duration: 0.9,
-      ease: "power3.out",
-    })
-      .from(
-        ".invitation-names",
-        { opacity: 0, y: 25, duration: 0.9, ease: "power3.out" },
-        "-=0.5",
-      )
-      .from(
-        ".invitation-details",
-        { opacity: 0, y: 25, duration: 0.9, ease: "power3.out" },
-        "-=0.5",
-      )
-      .from(
-        ".invitation-date",
-        { opacity: 0, y: 25, duration: 0.9, ease: "power3.out" },
-        "-=0.5",
-      )
-      .from(
-        ".invitation-location",
-        { opacity: 0, y: 20, duration: 0.7, ease: "power3.out" },
-        "-=0.4",
-      )
-      .from(
-        ".invitation-reception",
-        { opacity: 0, y: 20, duration: 0.7, ease: "power3.out" },
-        "-=0.4",
-      )
-      .from(
-        ".invitation-parents",
-        { opacity: 0, y: 20, duration: 0.7, ease: "power3.out" },
-        "-=0.4",
-      )
-      .from(
-        ".invitation-gift",
-        { opacity: 0, y: 20, duration: 0.7, ease: "power3.out" },
-        "-=0.4",
-      );
-  }, sectionRef.value!);
+      // Orden visual de arriba hacia abajo:
+      tl.from(".invitation-logo", {
+        autoAlpha: 0,
+        y: 30,
+        scale: 0.96,
+      })
+        .from(
+          ".invitation-parents",
+          { autoAlpha: 0, y: 25 },
+          "-=0.5",
+        )
+        .from(
+          ".invitation-names",
+          { autoAlpha: 0, y: 30, scale: 0.97 },
+          "-=0.5",
+        )
+        .from(
+          ".invitation-details",
+          { autoAlpha: 0, y: 30 },
+          "-=0.5",
+        )
+        .from(
+          ".invitation-date",
+          { autoAlpha: 0, y: 30, scale: 0.97 },
+          "-=0.5",
+        )
+        .from(
+          ".invitation-location",
+          { autoAlpha: 0, y: 25 },
+          "-=0.5",
+        )
+        .from(
+          ".invitation-reception",
+          { autoAlpha: 0, y: 25 },
+          "-=0.5",
+        )
+        .from(
+          ".invitation-gift",
+          { autoAlpha: 0, y: 20 },
+          "-=0.5",
+        );
+    }, sectionRef.value!);
 });
 
 onUnmounted(() => {
@@ -129,7 +139,7 @@ onUnmounted(() => {
 
       <!-- Invitation text -->
       <div class="invitation-details mb-12">
-        <p class="body-text" style="font-size: 11px; line-height: 2.4; margin-bottom: 18px;">
+        <p class="body-text" style="font-size: 12px; line-height: 2.4; margin-bottom: 18px;">
           CON MUCHA ALEGRÍA LES QUEREMOS HACER PARTICIPES DE LA<br>
           CELEBRACIÓN DE NUESTRA
         </p>
@@ -165,7 +175,7 @@ onUnmounted(() => {
 
       <!-- Gift note -->
       <div class="invitation-gift">
-        <p class="body-text" style="font-size: 9px; line-height: 2.2;">
+        <p class="body-text" style="font-size: 12px; line-height: 2.2;">
           SU PRESENCIA ES EL MEJOR REGALO. SI<br>
           DESEAS AYUDARNOS EN ESTA NUEVA<br>
           ETAPA, PREFERIMOS UNA<br>
@@ -178,6 +188,17 @@ onUnmounted(() => {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Great+Vibes&display=swap');
+
+.invitation-logo,
+.invitation-parents,
+.invitation-names,
+.invitation-details,
+.invitation-date,
+.invitation-location,
+.invitation-reception,
+.invitation-gift {
+  will-change: transform, opacity;
+}
 
 .name-text {
   font-family: 'Cinzel', serif;
@@ -223,7 +244,7 @@ onUnmounted(() => {
 .label-text {
   font-family: 'Cinzel', serif;
   color: #2E4A6E;
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   opacity: 0.7;
@@ -232,7 +253,7 @@ onUnmounted(() => {
 .parent-name {
   font-family: 'Cinzel', serif;
   color: #2E4A6E;
-  font-size: clamp(11px, 2vw, 13px);
+  font-size: clamp(14px, 2vw, 13px);
   letter-spacing: 0.06em;
   line-height: 1.5;
 }

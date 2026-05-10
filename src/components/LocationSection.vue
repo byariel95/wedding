@@ -27,18 +27,19 @@ function openWaze(): void { window.open(`https://waze.com/ul?ll=${lat},${lng}&na
 
 onMounted(() => {
   ctx.value = gsap.context(() => {
-    gsap.from('.location-header', {
-      opacity: 0, y: 35, duration: 1.1, ease: 'power3.out',
-      scrollTrigger: { trigger: '.location-header', start: 'top 88%' },
+    const tl = gsap.timeline({
+      defaults: { duration: 0.9, ease: 'power3.out' },
+      scrollTrigger: {
+        trigger: sectionRef.value,
+        start: 'top 75%',
+        end: 'bottom 30%',
+        scrub: 1,
+      },
     })
-    gsap.from('.location-map-wrapper', {
-      opacity: 0, y: 50, duration: 1.2, ease: 'power3.out',
-      scrollTrigger: { trigger: '.location-map-wrapper', start: 'top 88%' },
-    })
-    gsap.from('.location-card', {
-      opacity: 0, y: 30, duration: 0.9, ease: 'power2.out', delay: 0.15,
-      scrollTrigger: { trigger: '.location-card', start: 'top 90%' },
-    })
+
+    tl.from('.location-header', { autoAlpha: 0, y: 35, duration: 1.1 })
+      .from('.location-map-wrapper', { autoAlpha: 0, y: 50, scale: 0.97, duration: 1.2 }, '-=0.6')
+      .from('.location-card', { autoAlpha: 0, y: 30, ease: 'power2.out' }, '-=0.7')
   }, sectionRef.value!)
 })
 
@@ -150,3 +151,11 @@ onUnmounted(() => { ctx.value?.revert() })
     </div>
   </section>
 </template>
+
+<style scoped>
+.location-header,
+.location-map-wrapper,
+.location-card {
+  will-change: transform, opacity;
+}
+</style>

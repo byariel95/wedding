@@ -82,18 +82,19 @@ onMounted(() => {
   window.addEventListener('keydown', handleKeydown)
 
   ctx.value = gsap.context(() => {
-    gsap.from('.gallery-header', {
-      opacity: 0, y: 35, duration: 1.1, ease: 'power3.out',
-      scrollTrigger: { trigger: '.gallery-header', start: 'top 88%' },
+    const tl = gsap.timeline({
+      defaults: { duration: 0.9, ease: 'power3.out' },
+      scrollTrigger: {
+        trigger: sectionRef.value,
+        start: 'top 75%',
+        end: 'bottom 30%',
+        scrub: 1,
+      },
     })
-    gsap.from('.gallery-frame', {
-      opacity: 0, y: 50, duration: 1.2, ease: 'power3.out',
-      scrollTrigger: { trigger: '.gallery-frame', start: 'top 88%' },
-    })
-    gsap.from('.gallery-strip', {
-      opacity: 0, y: 20, duration: 0.9, ease: 'power2.out', delay: 0.15,
-      scrollTrigger: { trigger: '.gallery-strip', start: 'top 92%' },
-    })
+
+    tl.from('.gallery-header', { autoAlpha: 0, y: 35, duration: 1.1 })
+      .from('.gallery-frame', { autoAlpha: 0, y: 50, scale: 0.97, duration: 1.2 }, '-=0.6')
+      .from('.gallery-strip', { autoAlpha: 0, y: 20, ease: 'power2.out' }, '-=0.7')
   }, sectionRef.value!)
 })
 
@@ -116,7 +117,7 @@ onUnmounted(() => {
 
       <!-- Header -->
       <div class="gallery-header text-center mb-14">
-        <p class="font-body text-sand/70 text-xs tracking-[0.35em] uppercase mb-3">Nuestra</p>
+        <p class="font-body text-sand/70 text-lg tracking-[0.35em] uppercase mb-3">Nuestra</p>
         <h2 class="font-display text-navy font-light tracking-wide mb-5" style="font-size: clamp(2.4rem, 6vw, 3.8rem);">
           Historia
         </h2>
@@ -292,6 +293,12 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+.gallery-header,
+.gallery-frame,
+.gallery-strip {
+  will-change: transform, opacity;
+}
+
 .lightbox-fade-enter-active,
 .lightbox-fade-leave-active {
   transition: opacity 0.35s ease;

@@ -2,11 +2,14 @@
   "name": "wedding-invitation",
   "version": "1.0.0",
   "type": "module",
+  "homepage": "https://byariel95.github.io/wedding",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.3",

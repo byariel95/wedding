@@ -6,6 +6,7 @@ import InvitationSection from './components/InvitationSection.vue'
 import DressCodeSection from './components/DressCodeSection.vue'
 import GenderRevealSection from './components/GenderRevealSection.vue'
 import LocationSection from './components/LocationSection.vue'
+import ClosingSection from './components/ClosingSection.vue'
 import MusicPlayer from './components/MusicPlayer.vue'
 </script>
 
@@ -19,6 +20,7 @@ import MusicPlayer from './components/MusicPlayer.vue'
     <DressCodeSection />
     <GenderRevealSection />
     <LocationSection />
+    <ClosingSection />
 
     <!-- Floating music player — always rendered, fixed position -->
     <MusicPlayer />

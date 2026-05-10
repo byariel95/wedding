@@ -12,11 +12,17 @@ const ctx = ref<gsap.Context | null>(null);
 onMounted(() => {
   ctx.value = gsap.context(() => {
     gsap.from(".dresscode-image", {
-      opacity: 0,
-      y: 30,
-      duration: 1,
+      autoAlpha: 0,
+      y: 40,
+      scale: 0.96,
+      duration: 1.2,
       ease: "power3.out",
-      scrollTrigger: { trigger: sectionRef.value, start: "top 85%" },
+      scrollTrigger: {
+        trigger: sectionRef.value,
+        start: "top 80%",
+        end: "center center",
+        scrub: 1,
+      },
     });
   }, sectionRef.value!);
 });
@@ -42,3 +48,9 @@ onUnmounted(() => {
     </div>
   </section>
 </template>
+
+<style scoped>
+.dresscode-image {
+  will-change: transform, opacity;
+}
+</style>

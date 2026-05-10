@@ -74,7 +74,7 @@ onUnmounted(() => { audioRef.value?.pause() })
       <!-- Main button -->
       <button
         :aria-label="isPlaying ? 'Pausar música' : 'Reproducir música'"
-        class="relative w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-105 active:scale-95 focus:outline-none"
+        class="music-btn relative w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-105 active:scale-95 focus:outline-none"
         style="
           background: linear-gradient(135deg, #344668 0%, #2C395C 100%);
           box-shadow:
@@ -136,6 +136,24 @@ onUnmounted(() => { audioRef.value?.pause() })
 </template>
 
 <style scoped>
+@keyframes music-btn-entrance {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.music-btn {
+  animation: music-btn-entrance 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
 .music-pulse-outer {
   animation: pulse-ring 2.2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
 }

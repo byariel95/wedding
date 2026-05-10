@@ -8,6 +8,7 @@ export default defineConfig({
     vue(),
     tailwindcss(),
   ],
+  base: "https://byariel95.github.io/wedding",
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
